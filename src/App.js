@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+const randomArray = [];
+for (let i = 0; i < 1000; i++) {
+  randomArray.push(Math.random());
+}
+
+export default function App() {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [count]);
+
+  const mappedArray = React.useMemo(() => {
+    return randomArray.map(num => (
+      <div key={num}>{num}</div>
+    ));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>{count}</h1>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))"
+        }}
+      >
+        {/* {randomArray.map(num => (
+          <div key={num}>{num}</div>
+        ))} */}
+        {mappedArray}
+      </div>
     </div>
   );
 }
-
-export default App;
