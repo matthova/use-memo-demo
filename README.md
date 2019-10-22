@@ -1,5 +1,8 @@
 This react-app is used to show how refactoring arrays to use React's `useMemo` hook will speed up the rendering of content.
 
+;tldr if you're mapping through > 10 items, useMemo is a great tool for reducing render time.
+It may be useful for less than 10 items in cases where the children being rendered are more complex, but that isn't covered in this proof-of-concept
+
 The render time for this app was measured using [React dev tools in Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en).
 
 Some things worth noting:
@@ -30,3 +33,4 @@ Some things worth noting:
 |2048| 77.5  |  20.7 |  80.2 | 7.1 |
 |4096|  111.1 |  39.0 |  122.9 | 11.4 |
  * 8192 items breaks the debugger 😅
+
